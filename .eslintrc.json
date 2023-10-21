@@ -1,0 +1,19 @@
+{
+  "extends": ["next/core-web-vitals", "plugin:storybook/recommended"],
+  "plugins": ["eslint-plugin-import-helpers"],
+  "rules": {
+    "import/no-unresolved": "error",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": ["module", "/components/", ["parent", "sibling", "index"]],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ]
+  }
+}
