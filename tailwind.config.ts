@@ -42,6 +42,8 @@ const config: Config = {
       backgroundColor: {
         light: 'rgba(var(--bg-light), <alpha-value>)',
         dark: 'rgba(var(--bg-dark), <alpha-value>)',
+        success: 'rgba(var(--text-success), <alpha-value>)',
+        error: 'rgba(var(--text-error), <alpha-value>)',
         disabled: 'rgba(var(--bg-disabled), <alpha-value>)',
       },
       textColor: {
@@ -50,6 +52,8 @@ const config: Config = {
           secondary: 'rgba(var(--text-secondary), <alpha-value>)',
           tertiary: 'rgba(var(--text-tertiary), <alpha-value>)',
         },
+        success: 'rgba(var(--text-success), <alpha-value>)',
+        error: 'rgba(var(--text-error), <alpha-value>)',
       },
       boxShadow: {
         sm: 'var(--shadow-sm)',
