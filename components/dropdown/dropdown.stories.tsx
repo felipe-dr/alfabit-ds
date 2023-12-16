@@ -4,7 +4,7 @@ import React from 'react';
 import Dropdown, { type DropdownProps } from './dropdown';
 
 const meta: Meta<typeof Dropdown> = {
-  title: 'Molecules/Dropdown',
+  title: 'Design System/Molecules/Dropdown',
   component: Dropdown,
   decorators: [
     (Story) => (
