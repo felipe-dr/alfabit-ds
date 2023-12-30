@@ -1,40 +1,162 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+  <img alt="Alfabit Design System" title="#alfabit-ds" src="public/logo-alfabit-branco.png" height="150" />
+</h1>
 
-## Getting Started
+<p align="center">
+  <h2 align="center">
+    Alfabit Design System
+  </h2>
+</p>
 
-First, run the development server:
+<p align="center">
+  Biblioteca de componentes web da Alfabit
+</p>
+
+<p align="center">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/felipe-dr/alfabit-ds?color=4e5acf">
+  <a aria-label="Last Commit" href="https://github.com/felipe-dr/alfabit-ds/commits/main">
+    <img alt="Last commit on GitHub" src="https://img.shields.io/github/last-commit/felipe-dr/alfabit-ds?color=4e5acf">
+    <img alt="License" src="https://img.shields.io/badge/license-MIT-4e5acf">
+  </a>
+</p>
+
+<p align="center">
+  <a target="_blank" href="https://www.typescriptlang.org">
+    <img src="https://img.shields.io/static/v1?color=blue&label=Typescript&message=TS&?style=plastic&logo=Typescript">
+  </a>
+  <a target="_blank" href="https://reactjs.org/">
+    <img alt="ReactJS" src="https://img.shields.io/static/v1?color=blue&label=React&message=JS&?style=plastic&logo=React">
+  </a>
+  <a target="_blank" href="https://nextjs.org/">
+    <img alt="Next.js" src="https://img.shields.io/static/v1?color=blue&label=Next&message=JS&?style=plastic&logo=Next.js">
+  </a>
+  <a target="_blank" href="https://storybook.js.org/docs/react/get-started/introduction">
+    <img src="https://img.shields.io/static/v1?color=red&label=Storybook&message=SB&?style=plastic&logo=Storybook">
+  </a>
+  <a target="_blank" href="https://tailwindcss.com/">
+    <img src="https://img.shields.io/static/v1?color=blue&label=Tailwind&message=CSS&?style=plastic&logo=TailwindCSS">
+  </a>
+  <a target="_blank" href="https://www.figma.com/">
+    <img src="https://img.shields.io/static/v1?color=red&label=Figma&message=  &?style=plastic&logo=Figma">
+  </a>
+</p>
+
+## O que é?
+
+A Alfabit é uma empresa de tecnologia inovadora dedicada a fornecer soluções criativas e eficientes para seus clientes. Reconhecendo a importância do design consistente e intuitivo em todas as suas plataformas e produtos, a Alfabit decidiu investir em um design system de ponta.
+<br><br>
+
+## 👨‍💻 Como instalar?
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Utilizando npm
+npm i alfabit-ds
+
+# Utilizando yarn
+yarn add alfabit-ds
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏃 Como usar?
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+A biblioteca Alfabit-ds foi criada para funcionar em aplicações Next.js+TailwindCSS. Portanto, para usá-la lembre-se de criar suas aplicações com essa estrutura. Para que você consiga usar todos os componentes da biblioteca sem problemas é necessário uma configuração adicional no seu projeto. Vamos fazer isso passo a passo:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. No mesmo arquivo que você importa as camadas do tailwind (geralmente o arquivo `globals.css` ou `styles.css` ) importe o arquivo CSS da biblioteca Alfabit também
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+   ```tsx
+   import './globals.css';
+   import 'alfabit-ds/styles/globals.css';
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Dentro do arquivo de configuração do Tailwind, o `tailwind.config.js`, adicione as configurações da biblioteca Alfabit como `preset`:
 
-## Learn More
+   ```tsx
+   const config = {
+     presets: [require('alfabit-ds/tailwind.config')],
+     // ... demais configurações ...
+   };
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. Adicione no mesmo arquivo de configuração a referência dos arquivos da biblioteca Alfabit para serem cobertas pelo Tailwind e processadas no PostCSS. Para isso, basta adicionar o caminho dos componentes da biblioteca Alfabit dentro da propriedade `content`, no mesmo arquivo de configuração do tailwind do passo anterior:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```tsx
+   const config = {
+     content: [
+       './pages/**/*.{js,ts,jsx,tsx,mdx}',
+       './components/**/*.{js,ts,jsx,tsx,mdx}',
+       './app/**/*.{js,ts,jsx,tsx,mdx}',
+       './node_modules/alfabit-ds/components/**/*.{js,ts,jsx,tsx,mdx}',
+     ],
+     // ... demais configurações ...
+   };
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. Configure o transpile do Next.js no arquivo `next.config.js`. Na nova versão do Next 13 temos um recurso que vai ajudar a transpilar a nossa biblioteca. Sem isso vamos ficar recebendo sucessivos erros de compilação porque o Next não vai entender nossa biblioteca.
 
-## Deploy on Vercel
+   ```jsx
+   /** @type {import('next').NextConfig} */
+   const nextConfig = {
+     transpilePackages: ['alfabit-ds'],
+   };
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   module.exports = nextConfig;
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   E agora você pode usar os componentes da biblioteca em suas páginas:
+
+```tsx
+'use client';
+import { Typograph } from 'alfabit-ds/components';
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center p-24 gap-5">
+      <div className="px-8 py-5 rounded-md flex flex-col gap-3 text-center text-gray-950 bg-gray-800">
+        <Typograph element="h3" size="title3" className="font-black text-white">
+          Olá mundo!
+        </Typograph>
+      </div>
+    </main>
+  );
+}
+```
+
+## 🎨 Quais cores foram utilizadas no padrão da biblioteca?
+
+Toda a identidade visual da biblioteca, como os componentes, espaçamentos e cores, você pode acessar no [Figma clicando aqui neste link](https://www.figma.com/file/h86gUvqUXTKwgr6tVYinLT/React%3A-Design-System-com-Tailwind?type=design&node-id=0-1&t=GuaFV9cp30SS2di9-0).
+
+> Confira também a documentação da biblioteca para mais detalhes de uso [Documentação](https://alfabit-ds.vercel.app/?path=/docs/design-tokens-colors--docs).
+
+## 📚 Quais dependências são usadas nesta biblioteca?
+
+- [React](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Storybook](https://storybook.js.org/docs/react/get-started/introduction)
+- [Class Variance Authority (cva)](https://cva.style/docs)
+- [classnames](https://github.com/JedWatson/classnames)
+- [HeadlessUI](https://headlessui.com/)
+- [heroicons](https://heroicons.com/)
+- [Chromatic](https://www.chromatic.com/)
+
+## 📝 Documentação
+
+Para verificar a documentação click [aqui](https://alfabit-ds.vercel.app/?path=/docs/design-tokens-colors--docs)
+
+- Para Verificar a documentação em desenvolvimento faça
+
+```bash
+npm run storybook ou yarn storybook
+```
+
+## Desenvolvedores/Contribuintes :octocat:
+
+Esta é a equipe responsável pela criação desta biblioteca de componentes
+
+| [<img src="https://avatars.githubusercontent.com/u/77410403?v=4" width=115><br><sub>Neilton Seguins</sub>](https://github.com/NeiltonSeguins) | [<img src="https://github.com/cardozov.png" width=115><br><sub>Vinicius Cardozo</sub>](https://github.com/cardozov) |
+| :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: |
+
+## Licença
+
+The [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.html) (GPL)
+
+Copyright :copyright: 2023 - Alfabit Design System

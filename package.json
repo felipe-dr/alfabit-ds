@@ -1,6 +1,6 @@
 {
-  "name": "alfabit-web-next",
-  "version": "0.1.1",
+  "name": "alfabit-ds",
+  "version": "1.1.0",
   "private": false,
   "description": "![3267 - React: Versione e publique o seu Design System](thumb.png)",
   "main": "components/index.ts",
